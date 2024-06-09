@@ -23,16 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,7 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "apps.users"
+    "apps.users",
+    "apps.cart",
+    "apps.category",
+    "apps.items",
+    "apps.orders",
+
 ]
 
 MIDDLEWARE = [
@@ -90,11 +85,18 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': config("MONGODB_NAME"),
+        'CLIENT': {
+            'host':  config("MONGODB_URI"),
+            'username':  config("MONGODB_USERNAME"),  
+            'password':  config("MONGODB_PASSWORD"),
+        },
+    },
 }
+
+
 
 
 # Password validation
