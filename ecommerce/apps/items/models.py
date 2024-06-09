@@ -11,3 +11,4 @@ class Items(models.Model):
     update = models.DateField()
 
     belong_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='item')
+    
